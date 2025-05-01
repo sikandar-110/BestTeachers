@@ -3,7 +3,7 @@ const config = {
     commonContact: {
         phone: "+92 3019382521",
         whatsapp: "+92 3019382521",
-        address: "uch sharif, Islamabad, Pakistan",
+        address: "Uch sharif, Islamabad, Pakistan",
         availability: "Mon-Sat: 10:00 AM - 7:00 PM"
     }
 };
