@@ -31,7 +31,7 @@
         </div>
     </footer>
 
-    <script src="data.js"></script>
+    <script src="js/data.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Set current year
@@ -52,7 +52,8 @@
                     <h3 class="teacher-name">${teacher.name}</h3>
                     <div class="teacher-subject">${teacher.title}</div>
                     <p class="teacher-bio">${teacher.bio}</p>
-                    <a href="teachers.html?teacher=${teacher.id}" class="view-profile">View Profile</a>
+                  <a href="teachers/#${teacher.id}" class="view-profile">View Profile</a>
+                
                 `;
                 
                 teachersContainer.appendChild(teacherCard);
