@@ -4,7 +4,7 @@ const config = {
         phone: "+92 3019382521",
         whatsapp: "+92 3019382521",
         address: "Uch sharif, Islamabad, Pakistan",
-        availability: "Mon-Sat: 10:00 AM - 7:00 PM"
+        availability: "Mon-Sat: 12:00 AM - 7:00 PM"
     }
 };
 
