@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="logo-container">
+            <img id="headerProfileImg" alt="Profile Picture" class="logo-img">
+            <div class="logo-text" id="headerName">Loading...</div>
+        </div>
+        
+        <nav class="nav-links">
+            <a href="#about" class="nav-link">
+                <i class="fas fa-user"></i>
+                <span>About</span>
+            </a>
+            <a href="#testimonials" class="nav-link">
+                <i class="fas fa-comment-dots"></i>
+                <span>Testimonials</span>
+            </a>
+            <a href="#contact" class="nav-link">
+                <i class="fas fa-envelope"></i>
+                <span>Contact</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="profile-container">
+            <img id="heroProfileImg" alt="Teacher Profile" class="profile-img">
+            <div class="profile-badge">
+                <i class="fas fa-award"></i>
+            </div>
+        </div>
+        
+        <h1 class="hero-title" id="heroTitle">Loading...</h1>
+        <h2 class="hero-subtitle" id="heroSubtitle">Loading...</h2>
+        <p class="hero-text" id="heroText">Loading...</p>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title">About Me</h2>
+        
+        <div class="about-content">
+            <div class="about-image">
+                <img id="aboutImage" alt="Teaching">
+            </div>
+            
+            <div class="about-text-content">
+                <p class="about-text" id="aboutText1">Loading...</p>
+                <p class="about-text" id="aboutText2">Loading...</p>
+                
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <div class="stat-number" id="yearsExp">0</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="studentsTaught">0</div>
+                        <div class="stat-label">Students Taught</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="successRate">0</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section testimonials-section" id="testimonials">
+        <h2 class="section-title">Student Testimonials</h2>
+        
+        <div class="testimonials-container" id="testimonialsContainer">
+            <!-- Testimonials will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Other Teachers Section -->
+    <section class="section section-alt" id="otherTeachers">
+        <h2 class="section-title">Other Faculty Members</h2>
+        
+        <div class="teachers-container" id="otherTeachersContainer">
+            <!-- Other teachers will be loaded dynamically -->
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title">Contact Me</h2>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-title">Phone</div>
+                        <div class="contact-detail">
+                            <a href="#" id="contactPhone">Loading...</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-title">Email</div>
+                        <div class="contact-detail">
+                            <a href="#" id="contactEmail">Loading...</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-title">WhatsApp</div>
+                        <div class="contact-detail">
+                            <a href="#" id="contactWhatsApp" class="whatsapp-link">Loading...</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-text">
+                        <div class="contact-title">Address</div>
+                        <div class="contact-detail" id="contactAddress">Loading...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" class="form-control">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" id="subject" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" class="form-control" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <i class="fab fa-whatsapp"></i> 
+                        <span id="submitText">Send via WhatsApp</span>
+                        <div class="spinner" id="spinner"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo" id="footerName">Loading...</div>
+            
+            <div class="social-links">
+                <a href="#" class="social-link">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" class="social-link">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+            
+            <div class="copyright">
+                &copy; <span id="currentYear"></span> <span id="copyrightName">Loading...</span>. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <!-- Include Firebase if using -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    
+    <script src="../js/data.js"></script>
+    <script src="../js/testimonial.js"></script>
+    <script>
+        // Current teacher being displayed
+        let currentTeacher = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set current year
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+            
+            // Get teacher ID from URL parameter
+            const teacherId = window.location.hash.substring(1); 
+            
+            // Find and load the teacher
+            const teacher = teachers.find(t => t.id === teacherId);
+            if (teacher) {
+                currentTeacher = teacher;
+                loadTeacherData(teacher);
+                loadTestimonials(teacher.id);
+                loadOtherTeachers(teacher.id);
+            }
+            
+            setupEventListeners();
+        });
+
+        function loadTeacherData(teacher) {
+            try {
+                // Update header section
+                document.getElementById('headerName').textContent = teacher.name;
+                document.getElementById('headerProfileImg').src = `../${teacher.image}`;
+                document.getElementById('headerProfileImg').alt = teacher.name;
+                
+                // Update hero section
+                document.getElementById('heroTitle').textContent = teacher.heroTitle || teacher.name;
+                document.getElementById('heroSubtitle').textContent = teacher.heroSubtitle || teacher.title;
+                document.getElementById('heroText').textContent = teacher.heroText || teacher.bio;
+                document.getElementById('heroProfileImg').src = `../${teacher.image}`;
+                document.getElementById('heroProfileImg').alt = teacher.name;
+                
+                // Update about section
+                document.getElementById('aboutText1').textContent = teacher.aboutText1 || teacher.bio;
+                document.getElementById('aboutText2').textContent = teacher.aboutText2 || '';
+                document.getElementById('aboutImage').src = `../${teacher.aboutImage}` || `../${teacher.image}`;
+                document.getElementById('aboutImage').alt = `${teacher.name} teaching`;
+                
+                // Animate stats
+                if (teacher.stats) {
+                    animateValue(document.getElementById('yearsExp'), 0, teacher.stats.yearsExp, 2000);
+                    animateValue(document.getElementById('studentsTaught'), 0, teacher.stats.studentsTaught, 2000);
+                    animateValue(document.getElementById('successRate'), 0, teacher.stats.successRate, 2000);
+                }
+                
+                // Update contact section with individual details
+                const phoneLink = document.getElementById('contactPhone');
+                phoneLink.textContent = teacher.contact.phone;
+                phoneLink.href = `tel:${teacher.contact.phone}`;
+                
+                const emailLink = document.getElementById('contactEmail');
+                emailLink.textContent = teacher.contact.email;
+                emailLink.href = `mailto:${teacher.contact.email}`;
+                
+                const whatsappLink = document.getElementById('contactWhatsApp');
+                whatsappLink.textContent = teacher.contact.whatsapp;
+                whatsappLink.href = `https://wa.me/${teacher.contact.whatsapp}?text=Hello%20${encodeURIComponent(teacher.name)}%2C%20I%20have%20a%20question%20about%20your%20classes`;
+                whatsappLink.classList.add('whatsapp-link');
+                
+                document.getElementById('contactAddress').textContent = teacher.contact.address;
+                
+                // Update footer
+                document.getElementById('footerName').textContent = teacher.name;
+                document.getElementById('copyrightName').textContent = teacher.name;
+                
+                console.log(`Teacher data loaded successfully for ${teacher.name}`);
+            } catch (error) {
+                console.error('Error loading teacher data:', error);
+                // Fallback to default contact if available
+                document.getElementById('contactPhone').textContent = config.commonContact.phone;
+                document.getElementById('contactWhatsApp').textContent = config.commonContact.whatsapp;
+                document.getElementById('contactAddress').textContent = config.commonContact.address;
+            }
+        }
+
+        function loadTestimonials(teacherId) {
+            const testimonialsContainer = document.getElementById('testimonialsContainer');
+            testimonialsContainer.innerHTML = '';
+            
+            const teacherTestimonials = testimonials[teacherId] || [];
+            
+            if (teacherTestimonials.length === 0) {
+                testimonialsContainer.innerHTML = `
+                    <div class="no-testimonials">
+                        <p>No testimonials available yet for this teacher.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            teacherTestimonials.forEach(testimonial => {
+                const testimonialElement = document.createElement('div');
+                testimonialElement.className = 'testimonial';
+                
+                testimonialElement.innerHTML = `
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">${testimonial.text}</p>
+                        ${testimonial.urduText ? `<p class="testimonial-text testimonial-urdu">${testimonial.urduText}</p>` : ''}
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="../${testimonial.author.image}" alt="${testimonial.author.name}" class="author-img">
+                        <div class="author-info">
+                            <div class="author-name">${testimonial.author.name}</div>
+                            <div class="author-title">${testimonial.author.title}</div>
+                        </div>
+                    </div>
+                `;
+                
+                testimonialsContainer.appendChild(testimonialElement);
+            });
+        }
+
+        function loadOtherTeachers(excludeTeacherId) {
+            const otherTeachersContainer = document.getElementById('otherTeachersContainer');
+            otherTeachersContainer.innerHTML = '';
+            
+            teachers.forEach(teacher => {
+                if (teacher.id === excludeTeacherId) return;
+                
+                const teacherCard = document.createElement('div');
+                teacherCard.className = 'teacher-card';
+                
+                teacherCard.innerHTML = `
+                    <div class="teacher-img-container">
+                        <img src="../${teacher.image}" alt="${teacher.name}" class="teacher-img">
+                        <span class="teacher-specialty">${teacher.specialty}</span>
+                    </div>
+                    <h3 class="teacher-name">${teacher.name}</h3>
+                    <div class="teacher-subject">${teacher.title}</div>
+                    <p class="teacher-bio">${teacher.bio}</p>
+                    <a href="teachers.html?teacher=${teacher.id}" class="view-profile">View Profile</a>
+                `;
+                
+                otherTeachersContainer.appendChild(teacherCard);
+            });
+        }
+
+        function animateValue(element, start, end, duration) {
+            let startTime = null;
+            
+            const animation = (currentTime) => {
+                if (!startTime) startTime = currentTime;
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = progress === 1 ? `${value}+` : value;
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(animation);
+                }
+            };
+            
+            window.requestAnimationFrame(animation);
+        }
+
+        function setupContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const spinner = document.getElementById('spinner');
+            
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                submitText.textContent = 'Sending...';
+                spinner.style.display = 'block';
+                
+                // Get form values
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                // Validate form
+                if (!name || !subject || !message) {
+                    alert('Please fill in all required fields');
+                    resetButtonState();
+                    return;
+                }
+                
+                if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    alert('Please enter a valid email address');
+                    resetButtonState();
+                    return;
+                }
+                
+                // Get current teacher's WhatsApp number
+                const whatsappNumber = currentTeacher.contact.whatsapp;
+                
+                // Create WhatsApp message
+                const whatsappMessage = `New Contact Form Submission:\n\n` +
+                                       `Name: ${name}\n` +
+                                       `Email: ${email || 'Not provided'}\n` +
+                                       `Subject: ${subject}\n\n` +
+                                       `Message:\n${message}`;
+                
+                // Encode message for URL
+                const encodedMessage = encodeURIComponent(whatsappMessage);
+                
+                // Create WhatsApp URL
+                const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+                
+                // Open WhatsApp in new tab
+                setTimeout(() => {
+                    window.open(whatsappUrl, '_blank');
+                    contactForm.reset();
+                    resetButtonState();
+                    alert('Your message is ready to send on WhatsApp!');
+                }, 500);
+            });
+            
+            function resetButtonState() {
+                submitBtn.disabled = false;
+                submitText.textContent = 'Send via WhatsApp';
+                spinner.style.display = 'none';
+            }
+        }
+
+        function setupEventListeners() {
+            // Header scroll effect
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Back to top button
+            const backToTop = document.getElementById('backToTop');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+            
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Setup contact form
+            setupContactForm();
+        }
+    </script>
+</body>
+</html>
