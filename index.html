@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Faculty Members</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/<css2></css2>?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -31,7 +31,7 @@
         </div>
     </footer>
 
-    <script src="data.js"></script>
+    <script src="js/data.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Set current year
@@ -52,7 +52,8 @@
                     <h3 class="teacher-name">${teacher.name}</h3>
                     <div class="teacher-subject">${teacher.title}</div>
                     <p class="teacher-bio">${teacher.bio}</p>
-                    <a href="teachers.html?teacher=${teacher.id}" class="view-profile">View Profile</a>
+                  <a href="teachers/#${teacher.id}" class="view-profile">View Profile</a>
+                
                 `;
                 
                 teachersContainer.appendChild(teacherCard);
