@@ -105,7 +105,7 @@ const teachers = [
         name: 'Sir Monir Shamsi',
         title: 'English & Urdu Language Expert',
         specialty: 'English & Urdu',
-        image: 'img/sirmonir.jpg',
+        image: 'img/sirmonir1.jpg',
         aboutImage: 'img/a.jpg',
         bio: 'Language specialist with 9 years of expertise in academic writing and literature in both English and Urdu.',
         experience: '9 years',
