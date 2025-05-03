@@ -39,7 +39,7 @@ const teachers = [
         heroText: 'Transforming challenging concepts into understandable lessons through clear explanations and practical applications.'
     },
     {
-        id: 'shazad',
+        id: 'shahzad',
         name: 'Sir Shahzad',
         title: 'Mathematics Expert',
         specialty: 'Mathematics',
@@ -70,7 +70,7 @@ const teachers = [
         heroText: 'Building mathematical mastery through systematic learning and problem-solving techniques.'
     },
     {
-        id: 'shazad-iqbal',
+        id: 'shahzad-iqbal',
         name: 'Sir Shahzad Iqbal',
         title: 'Computer Science & Chemistry Expert',
         specialty: 'CS & Chemistry',
