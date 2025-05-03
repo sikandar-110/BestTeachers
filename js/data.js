@@ -44,7 +44,7 @@ const teachers = [
         title: 'Mathematics Expert',
         specialty: 'Mathematics',
         image: 'img/shazad1.jpg',
-        aboutImage: 'img/shazad.jpg',
+        aboutImage: 'img/shazad2.jpg',
         bio: 'Mathematics educator specializing in calculus, algebra, and geometry with 7 years of teaching experience.',
         experience: '7 years',
         students: '450+',
