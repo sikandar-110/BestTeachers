@@ -43,7 +43,7 @@ const teachers = [
         name: 'Sir Shahzad',
         title: 'Mathematics Expert',
         specialty: 'Mathematics',
-        image: 'img/shazad.jpg',
+        image: 'img/shazad1.jpg',
         aboutImage: 'img/shazad.jpg',
         bio: 'Mathematics educator specializing in calculus, algebra, and geometry with 7 years of teaching experience.',
         experience: '7 years',
