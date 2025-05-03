@@ -1,21 +1,11 @@
-// Main Configuration
-const config = {
-    commonContact: {
-        phone: "+92 3019382521",
-        whatsapp: "+92 3019382521",
-        address: "Uch Sharif, Islamabad, Pakistan",
-        availability: "Mon-Sat: 10:00 AM - 7:00 PM"
-    }
-};
 
-// Teacher Data Array with corrected name (Shahzad instead of Shadad)
 const teachers = [
     {
         id: 'majid',
         name: 'Sir Majid',
         title: 'Mathematics & Physics Specialist',
         specialty: 'Math & Physics',
-        image: 'img/boy.png',
+        image: `img/boy.png`,
         aboutImage: 'img/a.jpg',
         bio: 'Mathematics and physics educator with 8 years of experience helping students master challenging concepts through clear explanations and practical applications.',
         experience: '8 years',
@@ -25,10 +15,10 @@ const teachers = [
         teachingApproach: 'Problem-solving focused with real-world applications',
         email: 'majid@physicsteacher.com',
         contact: {
-            phone: "+923001234567",
-            whatsapp: "+923001234567",
+            phone: "+923019382521",
+            whatsapp: "+923019382521",
             email: "majid@physicsteacher.com",
-            address: "Block 5, Gulshan-e-Iqbal, Karachi"
+            address: "Uch sharif, Islamabad, Pakistan "
         },
         socialMedia: {
             facebook: '#',
@@ -49,7 +39,7 @@ const teachers = [
         heroText: 'Transforming challenging concepts into understandable lessons through clear explanations and practical applications.'
     },
     {
-        id: 'shahzad',
+        id: 'shazad',
         name: 'Sir Shahzad',
         title: 'Mathematics Expert',
         specialty: 'Mathematics',
@@ -63,10 +53,10 @@ const teachers = [
         teachingApproach: 'Step-by-step problem solving approach',
         email: 'shahzad@mathteacher.com',
         contact: {
-            phone: "+923007654321",
-            whatsapp: "+923007654321",
+            phone: "+923030086744",
+            whatsapp: "+923030086744",
             email: "shahzad@mathteacher.com",
-            address: "Block 7, Clifton, Karachi"
+            address: "Uch sharif, Islamabad, Pakistan "
         },
         stats: {
             yearsExp: 7,
@@ -80,7 +70,7 @@ const teachers = [
         heroText: 'Building mathematical mastery through systematic learning and problem-solving techniques.'
     },
     {
-        id: 'shahzad-iqbal',
+        id: 'shazad-iqbal',
         name: 'Sir Shahzad Iqbal',
         title: 'Computer Science & Chemistry Expert',
         specialty: 'CS & Chemistry',
@@ -94,10 +84,10 @@ const teachers = [
         teachingApproach: 'Project-based learning with real-world applications',
         email: 'shahzad.iqbal@csteacher.com',
         contact: {
-            phone: "+923008765432",
-            whatsapp: "+923008765432",
+            phone: "+923019382521",
+            whatsapp: "+923019382521",
             email: "shahzad.iqbal@csteacher.com",
-            address: "Block 9, Clifton, Karachi"
+            address: "Uch sharif, Islamabad, Pakistan "
         },
         stats: {
             yearsExp: 6,
@@ -125,10 +115,10 @@ const teachers = [
         teachingApproach: 'Interactive communication-based learning',
         email: 'monirshamsi@languageteacher.com',
         contact: {
-            phone: "+923009876543",
-            whatsapp: "+923009876543",
+            phone: "+923078156886",
+            whatsapp: "+923078156886",
             email: "monirshamsi@languageteacher.com",
-            address: "Block 10, North Nazimabad, Karachi"
+            address: "Uch sharif, Islamabad, Pakistan "
         },
         stats: {
             yearsExp: 9,
@@ -156,10 +146,10 @@ const teachers = [
         teachingApproach: 'Computational approaches to biological problems',
         email: 'adeelshamsi@bioteacher.com',
         contact: {
-            phone: "+923001112233",
-            whatsapp: "+923001112233",
+            phone: "+923019382521",
+            whatsapp: "+923019382521",
             email: "adeelshamsi@bioteacher.com",
-            address: "Block 11, Gulistan-e-Jauhar, Karachi"
+            address: "Uch sharif, Islamabad, Pakistan "
         },
         stats: {
             yearsExp: 5,
@@ -174,3 +164,4 @@ const teachers = [
     }
 ];
 
+        
