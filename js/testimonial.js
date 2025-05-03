@@ -31,6 +31,16 @@ const testimonials = {
             }
         },
         {
+            id: 5,
+            text: "Sir Majid instilled in me a deep passion for physics.  His lectures were always engaging and thought-provoking.",
+            urduText: "سر مجید نے میرے اندر طبیعیات کا گہرا شوق پیدا کیا۔ ان کے لیکچرز ہمیشہ دل چسپ اور فکر انگیز ہوتے تھے۔",
+            author: {
+                name: "Mohammad Ali",
+                title: "Physics Graduate",
+                image: "img/mohammad_ali.jpg" // Replace with actual image path
+            }
+        },
+        {
             id: 4,
             text: "His guidance in practical experiments was invaluable. Sir Majid's hands-on approach truly solidified my understanding.",
             urduText: "عملی تجربات میں ان کی رہنمائی انمول تھی۔ سر مجید کے عملی انداز نے واقعی میری سمجھ کو مضبوط کیا۔",
@@ -50,6 +60,16 @@ const testimonials = {
                 name: "Waqas",
                 title: "Engineering Student",
                 image: "img/waqas.jpg"
+            }
+        },
+        {
+            id: 6,
+            text: "Sir Shahzad's teaching style is excellent. He breaks down complex problems into smaller, more manageable steps, making it easier to understand.",
+            urduText: "سر شہزاد کا تدریسی انداز عمدہ ہے۔ وہ پیچیدہ مسائل کو چھوٹے، زیادہ قابل انتظام مراحل میں تقسیم کرتے ہیں، جس سے سمجھنا آسان ہو جاتا ہے۔",
+            author: {
+                name: "Mohammad Ali",
+                title: "Mathematics Student",
+                image: "img/mohammad_ali.jpg" // Replace with actual image path
             }
         },
         {
@@ -81,6 +101,16 @@ const testimonials = {
                 title: "Mathematics Enthusiast",
                 image: "img/raza.jpg"
             }
+        },
+        {
+            id: 5,
+            text: "Sir Shahzad has a wonderful way of breaking down complex mathematical ideas. His guidance was crucial for my success.",
+            urduText: "سر شہزاد کے پاس پیچیدہ ریاضیاتی خیالات کو آسان بنانے کا ایک شاندار طریقہ ہے۔ میری کامیابی کے لیے ان کی رہنمائی بہت اہم تھی۔",
+            author: {
+                name: "Ahmad",
+                title: "Mathematics Student",
+                image: "img/ahmad.jpg"
+            }
         }
     ],
     'shahzad-iqbal': [
@@ -102,6 +132,16 @@ const testimonials = {
                 name: "Raza",
                 title: "Chemistry Major",
                 image: "img/raza.jpg"
+            }
+        },
+        {
+            id: 7,
+            text: "Sir Shahzad's ability to make complex concepts understandable is impressive. He helped me see the practical applications of what I was learning.",
+            urduText: "سر شہزاد کی پیچیدہ تصورات کو قابل فہم بنانے کی صلاحیت متاثر کن ہے۔ انہوں نے مجھے یہ دیکھنے میں مدد کی کہ میں جو کچھ سیکھ رہا ہوں اس کا عملی استعمال کیا ہے۔",
+            author: {
+                name: "Mohammad Ali",
+                title: "Computer Science and Chemistry Student",
+                image: "img/mohammad_ali.jpg" // Replace with actual image path
             }
         },
         {
@@ -189,6 +229,16 @@ const testimonials = {
             }
         },
         {
+            id: 8,
+            text: "Sir Adeel's guidance was instrumental in helping me understand complex bioinformatics concepts and apply them to real-world research problems.",
+            urduText: "سر عادل کی رہنمائی پیچیدہ بائیو انفارمیٹکس کے تصورات کو سمجھنے اور انہیں حقیقی دنیا کے تحقیقی مسائل پر لاگو کرنے میں میری مدد کرنے میں اہم کردار ادا کر رہی ہے۔",
+            author: {
+                name: "Mohammad Ali",
+                title: "Bioinformatics Researcher",
+                image: "img/mohammad_ali.jpg" // Replace with actual image path
+            }
+        },
+        {
             id: 3,
             text: "Sir Adeel's enthusiasm for the subject is infectious. He made learning complex algorithms in biology both challenging and rewarding.",
             urduText: "مضمون کے لیے سر عادل کا جوش متعدی ہے۔ انہوں نے حیاتیات میں پیچیدہ الگورتھم سیکھنے کو چیلنجنگ اور فائدہ مند دونوں بنا دیا۔",
@@ -207,7 +257,16 @@ const testimonials = {
                 title: "Computational Biology Researcher",
                 image: "img/abdullah.jpg"
             }
+        },
+        {
+            id: 5,
+            text: "I was initially intimidated by computational biology, but Sir Adeel's patient and clear teaching style made it accessible and fascinating.",
+            urduText: "میں ابتدائی طور پر کمپیوٹیشنل بائیولوجی سے خوفزدہ تھا، لیکن سر عادل کے صبر آزما اور واضح تدریسی انداز نے اسے قابل رسائی اور دل چسپ بنا دیا۔",
+            author: {
+                name: "Ahmad",
+                title: "Biotechnology Student",
+                image: "img/ahmad.jpg"
+            }
         }
     ]
 };
-      
