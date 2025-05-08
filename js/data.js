@@ -5,8 +5,8 @@ const teachers = [
         name: 'Sir Majid',
         title: 'Mathematics & Physics Specialist',
         specialty: 'Math & Physics',
-        image: `img/boy.png`,
-        aboutImage: 'img/a.jpg',
+        image: `img/majid.jpg`,
+        aboutImage: 'img/majid1.jpg',
         bio: 'Mathematics and physics educator with 8 years of experience helping students master challenging concepts through clear explanations and practical applications.',
         experience: '8 years',
         students: '600+',
@@ -15,8 +15,8 @@ const teachers = [
         teachingApproach: 'Problem-solving focused with real-world applications',
         email: 'majid@physicsteacher.com',
         contact: {
-            phone: "+923019382521",
-            whatsapp: "+923019382521",
+            phone: "+923017739336",
+            whatsapp: "+923017739336",
             email: "majid@physicsteacher.com",
             address: "Uch sharif, Islamabad, Pakistan "
         },
@@ -84,8 +84,8 @@ const teachers = [
         teachingApproach: 'Project-based learning with real-world applications',
         email: 'shahzad.iqbal@csteacher.com',
         contact: {
-            phone: "+923019382521",
-            whatsapp: "+923019382521",
+            phone: "+923076469039",
+            whatsapp: "+923076469039",
             email: "shahzad.iqbal@csteacher.com",
             address: "Uch sharif, Islamabad, Pakistan "
         },
@@ -146,8 +146,8 @@ const teachers = [
         teachingApproach: 'Computational approaches to biological problems',
         email: 'adeelshamsi@bioteacher.com',
         contact: {
-            phone: "+923019382521",
-            whatsapp: "+923019382521",
+            phone: "+923017459110",
+            whatsapp: "+923017459110",
             email: "adeelshamsi@bioteacher.com",
             address: "Uch sharif, Islamabad, Pakistan "
         },
@@ -164,4 +164,3 @@ const teachers = [
     }
 ];
 
-        
