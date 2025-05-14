@@ -212,308 +212,427 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
-    <!-- Include Firebase if using -->
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
-    
-    <script src="../js/data.js"></script>
-    <script src="../js/testimonial.js"></script>
-<script>
-    // Current teacher being displayed
-    let currentTeacher = null;
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        // Set current year
-        document.getElementById('currentYear').textContent = new Date().getFullYear();
-        
-        // Function to load teacher based on hash
-        const loadTeacherFromHash = () => {
+    <script>
+        // Global variables
+        let currentTeacher = null;
+        let teachers = [];
+        let testimonials = {};
+        let config = {};
+
+        // Main initialization function
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Load all data first
+                await loadAllData();
+                
+                // Set current year
+                setCurrentYear();
+                
+                // Setup teacher profile based on URL hash
+                setupTeacherProfile();
+                
+                // Setup UI event listeners
+                setupEventListeners();
+                
+            } catch (error) {
+                console.error('Initialization error:', error);
+                showErrorState();
+            }
+        });
+
+        // Data loading functions
+        async function loadAllData() {
+            try {
+                // Load all data in parallel
+                const [teachersData, testimonialsData, configData] = await Promise.all([
+                    loadJSON('../js/teachers.json'),
+                    loadJSON('../js/testimonial.json'),
+                    
+                ]);
+                
+                teachers = teachersData || [];
+                testimonials = testimonialsData || {};
+                config = configData || {};
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                throw error;
+            }
+        }
+
+        async function loadJSON(url) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return await response.json();
+            } catch (error) {
+                console.error(`Error loading JSON from ${url}:`, error);
+                return null;
+            }
+        }
+
+        // Teacher profile functions
+        function setupTeacherProfile() {
+            // Initial load
+            loadTeacherFromHash();
+            
+            // Listen for hash changes
+            window.addEventListener('hashchange', loadTeacherFromHash);
+        }
+
+        function loadTeacherFromHash() {
             const teacherId = window.location.hash.substring(1);
-            const teacher = teachers.find(t => t.id === teacherId);
+            const teacher = findTeacherById(teacherId) || getDefaultTeacher();
             
             if (teacher) {
                 currentTeacher = teacher;
-                loadTeacherData(teacher);
-                loadTestimonials(teacher.id);
-                loadOtherTeachers(teacher.id);
-                // Scroll to top when teacher changes
-                window.scrollTo({ top: 0, behavior: 'instant' });
-            } else if (teachers.length > 0) {
-                // Default to first teacher if hash doesn't match or is empty
-                currentTeacher = teachers[0];
-                loadTeacherData(teachers[0]);
-                loadTestimonials(teachers[0].id);
-                loadOtherTeachers(teachers[0].id);
-                // Update URL hash to match the default teacher
-                window.location.hash = `#${teachers[0].id}`;
-                // Scroll to top when default teacher is loaded
+                renderTeacherProfile(teacher);
+                updateURLHash(teacher.id);
                 window.scrollTo({ top: 0, behavior: 'instant' });
             }
-        };
-        
-        // Initial load
-        loadTeacherFromHash();
-        
-        // Listen for hash changes
-        window.addEventListener('hashchange', loadTeacherFromHash);
-        
-        setupEventListeners();
-    });
-    
-    function loadTeacherData(teacher) {
-        try {
-            // Update header section
-            document.getElementById('headerName').textContent = teacher.name;
-            document.getElementById('headerProfileImg').src = `../${teacher.image}`;
-            document.getElementById('headerProfileImg').alt = teacher.name;
+        }
+
+        function findTeacherById(id) {
+            return teachers.find(t => t.id === id);
+        }
+
+        function getDefaultTeacher() {
+            return teachers.length > 0 ? teachers[0] : null;
+        }
+
+        function updateURLHash(teacherId) {
+            if (window.location.hash.substring(1) !== teacherId) {
+                window.location.hash = `#${teacherId}`;
+            }
+        }
+
+        function renderTeacherProfile(teacher) {
+            if (!teacher) return;
             
-            // Update hero section
-            document.getElementById('heroTitle').textContent = teacher.heroTitle || teacher.name;
-            document.getElementById('heroSubtitle').textContent = teacher.heroSubtitle || teacher.title;
-            document.getElementById('heroText').textContent = teacher.heroText || teacher.bio;
-            document.getElementById('heroProfileImg').src = `../${teacher.image}`;
-            document.getElementById('heroProfileImg').alt = teacher.name;
+            updateHeaderSection(teacher);
+            updateHeroSection(teacher);
+            updateAboutSection(teacher);
+            updateContactSection(teacher);
+            updateFooterSection(teacher);
             
-            // Update about section
-            document.getElementById('aboutText1').textContent = teacher.aboutText1 || teacher.bio;
-            document.getElementById('aboutText2').textContent = teacher.aboutText2 || '';
-            document.getElementById('aboutImage').src = `../${teacher.aboutImage}` || `../${teacher.image}`;
-            document.getElementById('aboutImage').alt = `${teacher.name} teaching`;
+            loadTestimonials(teacher.id);
+            loadOtherTeachers(teacher.id);
+        }
+
+        // Section update functions
+        function updateHeaderSection(teacher) {
+            setElementContent('headerName', teacher.name);
+            setElementAttribute('headerProfileImg', 'src', `../${teacher.image}`);
+            setElementAttribute('headerProfileImg', 'alt', teacher.name);
+        }
+
+        function updateHeroSection(teacher) {
+            setElementContent('heroTitle', teacher.heroTitle || teacher.name);
+            setElementContent('heroSubtitle', teacher.heroSubtitle || teacher.title);
+            setElementContent('heroText', teacher.heroText || teacher.bio);
+            setElementAttribute('heroProfileImg', 'src', `../${teacher.image}`);
+            setElementAttribute('heroProfileImg', 'alt', teacher.name);
+        }
+
+        function updateAboutSection(teacher) {
+            setElementContent('aboutText1', teacher.aboutText1 || teacher.bio);
+            setElementContent('aboutText2', teacher.aboutText2 || '');
+            setElementAttribute('aboutImage', 'src', `../${teacher.aboutImage || teacher.image}`);
+            setElementAttribute('aboutImage', 'alt', `${teacher.name} teaching`);
             
-            // Animate stats
             if (teacher.stats) {
-                animateValue(document.getElementById('yearsExp'), 0, teacher.stats.yearsExp, 2000);
-                animateValue(document.getElementById('studentsTaught'), 0, teacher.stats.studentsTaught, 2000);
-                animateValue(document.getElementById('successRate'), 0, teacher.stats.successRate, 2000);
+                animateValue('yearsExp', teacher.stats.yearsExp);
+                animateValue('studentsTaught', teacher.stats.studentsTaught);
+                animateValue('successRate', teacher.stats.successRate);
             }
-            
-            // Update contact section with individual details
+        }
+
+        function updateContactSection(teacher) {
+            // Phone
             const phoneLink = document.getElementById('contactPhone');
-            phoneLink.textContent = teacher.contact.phone;
-            phoneLink.href = `tel:${teacher.contact.phone}`;
-            
-            const emailLink = document.getElementById('contactEmail');
-            emailLink.textContent = teacher.contact.email;
-            emailLink.href = `mailto:${teacher.contact.email}`;
-            
-            const whatsappLink = document.getElementById('contactWhatsApp');
-            whatsappLink.textContent = teacher.contact.whatsapp;
-            whatsappLink.href = `https://wa.me/${teacher.contact.whatsapp}?text=Hello%20${encodeURIComponent(teacher.name)}%2C%20I%20have%20a%20question%20about%20your%20classes`;
-            whatsappLink.classList.add('whatsapp-link');
-            
-            document.getElementById('contactAddress').textContent = teacher.contact.address;
-            
-            // Update footer
-            document.getElementById('footerName').textContent = teacher.name;
-            document.getElementById('copyrightName').textContent = teacher.name;
-            
-            console.log(`Teacher data loaded successfully for ${teacher.name}`);
-        } catch (error) {
-            console.error('Error loading teacher data:', error);
-            // Fallback to default contact if available
-            if (config && config.commonContact) {
-                document.getElementById('contactPhone').textContent = config.commonContact.phone;
-                document.getElementById('contactWhatsApp').textContent = config.commonContact.whatsapp;
-                document.getElementById('contactAddress').textContent = config.commonContact.address;
+            if (phoneLink) {
+                phoneLink.textContent = teacher.contact.phone;
+                phoneLink.href = `tel:${teacher.contact.phone}`;
             }
-        }
-    }
-    
-    function loadTestimonials(teacherId) {
-        const testimonialsContainer = document.getElementById('testimonialsContainer');
-        testimonialsContainer.innerHTML = '';
-        
-        const teacherTestimonials = testimonials[teacherId] || [];
-        
-        if (teacherTestimonials.length === 0) {
-            testimonialsContainer.innerHTML = `
-                <div class="no-testimonials">
-                    <p>No testimonials available yet for this teacher.</p>
-                </div>
-            `;
-            return;
-        }
-        
-        teacherTestimonials.forEach(testimonial => {
-            const testimonialElement = document.createElement('div');
-            testimonialElement.className = 'testimonial';
             
-            testimonialElement.innerHTML = `
-                <div class="testimonial-content">
-                    <p class="testimonial-text">${testimonial.text}</p>
-                    ${testimonial.urduText ? `<p class="testimonial-text testimonial-urdu">${testimonial.urduText}</p>` : ''}
-                </div>
-                <div class="testimonial-author">
-                    <img src="../${testimonial.author.image}" alt="${testimonial.author.name}" class="author-img">
-                    <div class="author-info">
-                        <div class="author-name">${testimonial.author.name}</div>
-                        <div class="author-title">${testimonial.author.title}</div>
+            // Email
+            const emailLink = document.getElementById('contactEmail');
+            if (emailLink) {
+                emailLink.textContent = teacher.contact.email;
+                emailLink.href = `mailto:${teacher.contact.email}`;
+            }
+            
+            // WhatsApp
+            const whatsappLink = document.getElementById('contactWhatsApp');
+            if (whatsappLink) {
+                whatsappLink.textContent = teacher.contact.whatsapp;
+                whatsappLink.href = getWhatsAppUrl(teacher);
+                whatsappLink.classList.add('whatsapp-link');
+            }
+            
+            // Address
+            setElementContent('contactAddress', teacher.contact.address);
+        }
+
+        function updateFooterSection(teacher) {
+            setElementContent('footerName', teacher.name);
+            setElementContent('copyrightName', teacher.name);
+        }
+
+        function getWhatsAppUrl(teacher) {
+            const baseMessage = `Hello ${teacher.name}, I have a question about your classes`;
+            return `https://wa.me/${teacher.contact.whatsapp}?text=${encodeURIComponent(baseMessage)}`;
+        }
+
+        // Testimonials functions
+        function loadTestimonials(teacherId) {
+            const container = document.getElementById('testimonialsContainer');
+            if (!container) return;
+            
+            const teacherTestimonials = testimonials[teacherId] || [];
+            
+            if (teacherTestimonials.length === 0) {
+                container.innerHTML = `
+                    <div class="no-testimonials">
+                        <p>No testimonials available yet for this teacher.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = teacherTestimonials.map(createTestimonialElement).join('');
+        }
+
+        function createTestimonialElement(testimonial) {
+            return `
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">${testimonial.text}</p>
+                        ${testimonial.urduText ? `<p class="testimonial-text testimonial-urdu">${testimonial.urduText}</p>` : ''}
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="../${testimonial.author.image}" alt="${testimonial.author.name}" class="author-img">
+                        <div class="author-info">
+                            <div class="author-name">${testimonial.author.name}</div>
+                            <div class="author-title">${testimonial.author.title}</div>
+                        </div>
                     </div>
                 </div>
             `;
+        }
+
+        // Other teachers functions
+        function loadOtherTeachers(excludeTeacherId) {
+            const container = document.getElementById('otherTeachersContainer');
+            if (!container) return;
             
-            testimonialsContainer.appendChild(testimonialElement);
-        });
-    }
-    
-    function loadOtherTeachers(excludeTeacherId) {
-        const otherTeachersContainer = document.getElementById('otherTeachersContainer');
-        otherTeachersContainer.innerHTML = '';
-        
-        teachers.forEach(teacher => {
-            if (teacher.id === excludeTeacherId) return;
+            const otherTeachers = teachers.filter(teacher => teacher.id !== excludeTeacherId);
             
-            const teacherCard = document.createElement('div');
-            teacherCard.className = 'teacher-card';
-            
-            teacherCard.innerHTML = `
-                <div class="teacher-img-container">
-                    <img src="../${teacher.image}" alt="${teacher.name}" class="teacher-img">
-                    <span class="teacher-specialty">${teacher.specialty}</span>
-                </div>
-                <h3 class="teacher-name">${teacher.name}</h3>
-                <div class="teacher-subject">${teacher.title}</div>
-                <p class="teacher-bio">${teacher.bio}</p>
-                <a href="./#${teacher.id}" class="view-profile">View Profile</a>
-            `;
-            
-            otherTeachersContainer.appendChild(teacherCard);
-        });
-    }
-    
-    function animateValue(element, start, end, duration) {
-        let startTime = null;
-        
-        const animation = (currentTime) => {
-            if (!startTime) startTime = currentTime;
-            const progress = Math.min((currentTime - startTime) / duration, 1);
-            const value = Math.floor(progress * (end - start) + start);
-            element.textContent = progress === 1 ? `${value}+` : value;
-            
-            if (progress < 1) {
-                window.requestAnimationFrame(animation);
+            if (otherTeachers.length === 0) {
+                container.innerHTML = '<p>No other faculty members available.</p>';
+                return;
             }
-        };
-        
-        window.requestAnimationFrame(animation);
-    }
-    
-    function setupContactForm() {
-        const contactForm = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const submitText = document.getElementById('submitText');
-        const spinner = document.getElementById('spinner');
-        
-        contactForm.addEventListener('submit', (e) => {
+            
+            container.innerHTML = otherTeachers.map(createTeacherCard).join('');
+        }
+
+        function createTeacherCard(teacher) {
+            return `
+                <div class="teacher-card">
+                    <div class="teacher-img-container">
+                        <img src="../${teacher.image}" alt="${teacher.name}" class="teacher-img">
+                        <span class="teacher-specialty">${teacher.specialty}</span>
+                    </div>
+                    <h3 class="teacher-name">${teacher.name}</h3>
+                    <div class="teacher-subject">${teacher.title}</div>
+                    <p class="teacher-bio">${teacher.bio}</p>
+                    <a href="./#${teacher.id}" class="view-profile">View Profile</a>
+                </div>
+            `;
+        }
+
+        // Utility functions
+        function setCurrentYear() {
+            setElementContent('currentYear', new Date().getFullYear());
+        }
+
+        function setElementContent(elementId, content) {
+            const element = document.getElementById(elementId);
+            if (element) element.textContent = content;
+        }
+
+        function setElementAttribute(elementId, attribute, value) {
+            const element = document.getElementById(elementId);
+            if (element) element.setAttribute(attribute, value);
+        }
+
+        function animateValue(elementId, endValue, duration = 2000) {
+            const element = document.getElementById(elementId);
+            if (!element) return;
+            
+            let startTime = null;
+            const startValue = 0;
+            
+            const animation = (currentTime) => {
+                if (!startTime) startTime = currentTime;
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+                const value = Math.floor(progress * (endValue - startValue) + startValue);
+                element.textContent = progress === 1 ? `${value}+` : value;
+                
+                if (progress < 1) {
+                    window.requestAnimationFrame(animation);
+                }
+            };
+            
+            window.requestAnimationFrame(animation);
+        }
+
+        // Event handling functions
+        function setupEventListeners() {
+            setupScrollEffects();
+            setupBackToTopButton();
+            setupSmoothScrolling();
+            setupContactForm();
+        }
+
+        function setupScrollEffects() {
+            const header = document.getElementById('header');
+            if (!header) return;
+            
+            window.addEventListener('scroll', () => {
+                header.classList.toggle('scrolled', window.scrollY > 50);
+            });
+        }
+
+        function setupBackToTopButton() {
+            const backToTop = document.getElementById('backToTop');
+            if (!backToTop) return;
+            
+            window.addEventListener('scroll', () => {
+                backToTop.classList.toggle('visible', window.scrollY > 300);
+            });
+            
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+
+        function setupSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if (!this.classList.contains('view-profile')) {
+                        e.preventDefault();
+                        const targetId = this.getAttribute('href');
+                        scrollToSection(targetId);
+                    }
+                });
+            });
+        }
+
+        function scrollToSection(targetId) {
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function setupContactForm() {
+            const contactForm = document.getElementById('contactForm');
+            if (!contactForm) return;
+            
+            contactForm.addEventListener('submit', handleFormSubmit);
+        }
+
+        async function handleFormSubmit(e) {
             e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const spinner = document.getElementById('spinner');
+            
+            if (!submitBtn || !submitText || !spinner || !currentTeacher) return;
             
             // Show loading state
             submitBtn.disabled = true;
             submitText.textContent = 'Sending...';
             spinner.style.display = 'block';
             
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Validate form
-            if (!name || !subject || !message) {
-                alert('Please fill in all required fields');
-                resetButtonState();
-                return;
-            }
-            
-            if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                alert('Please enter a valid email address');
-                resetButtonState();
-                return;
-            }
-            
-            // Get current teacher's WhatsApp number
-            const whatsappNumber = currentTeacher.contact.whatsapp;
-            
-            // Create WhatsApp message
-            const whatsappMessage = `New Contact Form Submission:\n\n` +
-                `Name: ${name}\n` +
-                `Email: ${email || 'Not provided'}\n` +
-                `Subject: ${subject}\n\n` +
-                `Message:\n${message}`;
-            
-            // Encode message for URL
-            const encodedMessage = encodeURIComponent(whatsappMessage);
-            
-            // Create WhatsApp URL
-            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
-            
-            // Open WhatsApp in new tab
-            setTimeout(() => {
+            try {
+                const formData = getFormData();
+                
+                if (!validateFormData(formData)) {
+                    return;
+                }
+                
+                const whatsappUrl = createWhatsAppUrl(formData);
                 window.open(whatsappUrl, '_blank');
-                contactForm.reset();
+                e.target.reset();
+                
+            } catch (error) {
+                console.error('Form submission error:', error);
+                alert('An error occurred. Please try again.');
+            } finally {
                 resetButtonState();
-                alert('Your message is ready to send on WhatsApp!');
-            }, 500);
-        });
-        
-        function resetButtonState() {
-            submitBtn.disabled = false;
-            submitText.textContent = 'Send via WhatsApp';
-            spinner.style.display = 'none';
+            }
         }
-    }
-    
-    function setupEventListeners() {
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+
+        function getFormData() {
+            return {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+        }
+
+        function validateFormData(formData) {
+            if (!formData.name || !formData.subject || !formData.message) {
+                alert('Please fill in all required fields');
+                return false;
             }
-        });
-        
-        // Back to top button
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
+            
+            if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+                alert('Please enter a valid email address');
+                return false;
             }
-        });
-        
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                // Don't prevent default for teacher links (they need to change hash)
-                if (!this.classList.contains('view-profile')) {
-                    e.preventDefault();
-                }
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Setup contact form
-        setupContactForm();
-    }
-</script>
+            
+            return true;
+        }
+
+        function createWhatsAppUrl(formData) {
+            const message = `New Contact Form Submission:\n\n` +
+                `Name: ${formData.name}\n` +
+                `Email: ${formData.email || 'Not provided'}\n` +
+                `Subject: ${formData.subject}\n\n` +
+                `Message:\n${formData.message}`;
+            
+            return `https://wa.me/${currentTeacher.contact.whatsapp}?text=${encodeURIComponent(message)}`;
+        }
+
+        function resetButtonState() {
+            const submitBtn = document.getElementById('submitBtn');
+            const submitText = document.getElementById('submitText');
+            const spinner = document.getElementById('spinner');
+            
+            if (submitBtn && submitText && spinner) {
+                submitBtn.disabled = false;
+                submitText.textContent = 'Send via WhatsApp';
+                spinner.style.display = 'none';
+            }
+        }
+
+        function showErrorState() {
+            // Basic error handling - could be enhanced with a proper error UI
+            alert('Failed to load page data. Please try refreshing the page.');
+        }
+    </script>
 </body>
 </html>
